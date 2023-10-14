@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:project/viewmodel/viewmodel.dart';
+import 'package:provider/provider.dart';
+import 'dart:typed_data';
 
-void main() => runApp(const Mymaterial());
+import 'package:project/alretdialog.dart';
+
+
+void main() => runApp(const Mymaterial(),
+
+);
 
 class Mymaterial extends StatelessWidget {
   const Mymaterial({super.key});
@@ -52,6 +60,11 @@ class _StoreScreenState extends State<StoreScreen> {
                     Text('Title : Products', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800,letterSpacing: 0.8,),),
                     SizedBox(height: 6.0,),
                     Text('Price :00.00 EG', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800,letterSpacing: 0.8,),),
+                    TextButton(onPressed: (){
+                      print(index);
+                    } , child: Text("CLICK")),
+
+                    
                   ],
                 ),
               ),
@@ -98,15 +111,45 @@ class _StoreScreenState extends State<StoreScreen> {
         backgroundColor: Colors.black,
       ) ,
 
-      body: GridView.count(crossAxisCount: 2,
-          padding: const EdgeInsets.all(16.0),
-          childAspectRatio: 8.0/9.0,
-          children: _buildGridCards(10)
+      body: Consumer<ViewModel>(builder: (context , ViewModel, child ){
+
+        return GridView.count(crossAxisCount: 2,
+            padding: const EdgeInsets.all(16.0),
+            childAspectRatio: 8.0/9.0,
+            children: _buildGridCards(10)
 
 
+        );
+      },),
+
+      floatingActionButton: FloatingActionButton(onPressed: (){
+
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AlertArea()));
+      },
+      child: Icon(Icons.add),
       ),
     );
   }
+
+  AlertArea() {}
 }
 
+
+
+void name(){
+
+}
+
+List<Text>listtext (int cont , String username){
+
+  String textuser = "" ;
+
+  List<Text> mytext = List.generate(cont, (int index) {
+    print(index);
+    return Text ("Hi ${textuser}");
+  });
+
+  return mytext;
+
+}
 
